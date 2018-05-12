@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @EnableMongoRepositories(basePackageClasses = DrinkRepo.class)
 @Configuration
-
 public class DrinkService {
     @Autowired
     DrinkRepo drinkRepo;

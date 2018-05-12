@@ -3,6 +3,8 @@ package com.aionutas.pizzaorderingsystem.service;
 
 import com.aionutas.pizzaorderingsystem.model.entity.Order;
 import com.aionutas.pizzaorderingsystem.model.repository.OrderRepo;
+import com.aionutas.pizzaorderingsystem.model.utils.OrderStatus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -12,13 +14,16 @@ import java.util.Optional;
 
 @EnableMongoRepositories(basePackageClasses = OrderRepo.class)
 @Configuration
-public class OrderService {
+public class OrderService extends java.util.Observable {
 
     @Autowired
     OrderRepo orderRepo;
 
-    public Order addOrder(Order order) {
-        return orderRepo.save(order);
+        public void addOrder(Order order) {
+
+             order.setOrderStatus(OrderStatus.PROCESSED);
+             notifyObservers();
+             orderRepo.save(order);
     }
 
     public Optional<Order> getById(Long id) {

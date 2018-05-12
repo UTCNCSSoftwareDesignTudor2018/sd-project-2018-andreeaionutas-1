@@ -1,11 +1,13 @@
 package com.aionutas.pizzaorderingsystem.service;
 
+import com.aionutas.pizzaorderingsystem.model.entity.Ingredient;
 import com.aionutas.pizzaorderingsystem.model.entity.Pizza;
 import com.aionutas.pizzaorderingsystem.model.repository.PizzaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

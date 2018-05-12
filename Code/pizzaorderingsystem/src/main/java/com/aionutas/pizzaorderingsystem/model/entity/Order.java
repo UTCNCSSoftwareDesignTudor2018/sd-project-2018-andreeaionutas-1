@@ -1,18 +1,37 @@
 package com.aionutas.pizzaorderingsystem.model.entity;
 
+import com.aionutas.pizzaorderingsystem.model.utils.OrderStatus;
+
 import java.util.List;
+import java.util.Observable;
 
 public class Order {
     private Long id;
     private List<Pizza> pizzas;
     private List<Drink> drinks;
     private String address;
+    private OrderStatus orderStatus;
 
     public Order(Long id, List<Pizza> pizzas, List<Drink> drinks, String address) {
         this.id = id;
         this.pizzas = pizzas;
         this.drinks = drinks;
         this.address = address;
+    }
+
+    public Order(Long id, List<Pizza> pizzas, List<Drink> drinks, String address, OrderStatus orderStatus) {
+        this.id = id;
+        this.pizzas = pizzas;
+        this.drinks = drinks;
+        this.address = address;
+        this.orderStatus = orderStatus;
+    }
+
+    public Order(List<Pizza> pizzas, List<Drink> drinks, String address, OrderStatus orderStatus) {
+        this.pizzas = pizzas;
+        this.drinks = drinks;
+        this.address = address;
+        this.orderStatus = orderStatus;
     }
 
     public Order(List<Pizza> pizzas, List<Drink> drinks, String address) {
@@ -65,6 +84,16 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+        //notifyObservers();
+
     }
 
     @Override
