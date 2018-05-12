@@ -12,10 +12,17 @@ import static com.aionutas.pizzaorderingsystem.model.entity.Topping.getTotalTopp
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document
 public class Pizza {
+    public Long id;
     private List<Ingredient> ingredients;
     private List<Topping> toppings;
 
     public Pizza() {
+    }
+
+    public Pizza(Long id, List<Ingredient> ingredients, List<Topping> toppings) {
+        this.id = id;
+        this.ingredients = ingredients;
+        this.toppings = toppings;
     }
 
     public Pizza(List<Ingredient> ingredients) {
@@ -25,6 +32,14 @@ public class Pizza {
     public Pizza(List<Ingredient> ingredients, List<Topping> toppings) {
         this.ingredients = ingredients;
         this.toppings = toppings;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Ingredient> getIngredients() {

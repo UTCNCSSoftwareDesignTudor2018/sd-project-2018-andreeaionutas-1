@@ -1,29 +1,38 @@
 package com.aionutas.pizzaorderingsystem.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Document
-public class Menu {
+public class Order {
     private Long id;
     private List<Pizza> pizzas;
     private List<Drink> drinks;
+    private String address;
 
-    public Menu() {
-    }
-
-    public Menu(List<Pizza> pizzas, List<Drink> drinks) {
-        this.pizzas = pizzas;
-        this.drinks = drinks;
-    }
-
-    public Menu(Long id, List<Pizza> pizzas, List<Drink> drinks) {
+    public Order(Long id, List<Pizza> pizzas, List<Drink> drinks, String address) {
         this.id = id;
         this.pizzas = pizzas;
         this.drinks = drinks;
+        this.address = address;
+    }
+
+    public Order(List<Pizza> pizzas, List<Drink> drinks, String address) {
+        this.pizzas = pizzas;
+        this.drinks = drinks;
+        this.address = address;
+    }
+
+    public Order(Long id, List<Pizza> pizzas, String address) {
+        this.id = id;
+        this.pizzas = pizzas;
+        this.address = address;
+    }
+
+    public Order(List<Pizza> pizzas, String address) {
+        this.pizzas = pizzas;
+        this.address = address;
+    }
+
+    public Order() {
     }
 
     public Long getId() {
@@ -50,16 +59,25 @@ public class Menu {
         this.drinks = drinks;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Menu menu = (Menu) o;
+        Order order = (Order) o;
 
-        if (id != null ? !id.equals(menu.id) : menu.id != null) return false;
-        if (pizzas != null ? !pizzas.equals(menu.pizzas) : menu.pizzas != null) return false;
-        return drinks != null ? drinks.equals(menu.drinks) : menu.drinks == null;
+        if (id != null ? !id.equals(order.id) : order.id != null) return false;
+        if (pizzas != null ? !pizzas.equals(order.pizzas) : order.pizzas != null) return false;
+        if (drinks != null ? !drinks.equals(order.drinks) : order.drinks != null) return false;
+        return address != null ? address.equals(order.address) : order.address == null;
     }
 
     @Override
@@ -67,15 +85,17 @@ public class Menu {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (pizzas != null ? pizzas.hashCode() : 0);
         result = 31 * result + (drinks != null ? drinks.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Menu{" +
+        return "Order{" +
                 "id=" + id +
                 ", pizzas=" + pizzas +
                 ", drinks=" + drinks +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
