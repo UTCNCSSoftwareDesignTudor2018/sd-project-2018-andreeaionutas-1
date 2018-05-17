@@ -49,4 +49,9 @@ public class PizzaStoreController {
         return pizzaStoreService.getByName(name);
     }
 
+    @RequestMapping(value = "/findPizzaStoreByUsername/", method = RequestMethod.GET)
+    public PizzaStore findPizzaStoreByUsername(@RequestParam String name) throws JSONException {
+        return pizzaStoreService.getByUsername(name);
+    }
+
 }

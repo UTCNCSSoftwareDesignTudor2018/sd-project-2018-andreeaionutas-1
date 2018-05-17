@@ -13,6 +13,27 @@ public class Order {
     private OrderStatus orderStatus;
     private Long total;
 
+
+    public Order(Long id, List<Pizza> pizzas, String address, Long total) {
+        this.id = id;
+        this.pizzas = pizzas;
+        this.address = address;
+        this.total = total;
+    }
+
+    public Order(Long id, List<Pizza> pizzas) {
+        this.id = id;
+        this.pizzas = pizzas;
+    }
+
+    public Order(Long id, List<Pizza> pizzas, String address, OrderStatus orderStatus, Long total) {
+        this.id = id;
+        this.pizzas = pizzas;
+        this.address = address;
+        this.orderStatus = orderStatus;
+        this.total = total;
+    }
+
     public Order(Long id, List<Pizza> pizzas, List<Drink> drinks, String address, Long total) {
         this.id = id;
         this.pizzas = pizzas;
@@ -104,6 +125,82 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
         //notifyObservers();
+
+    }
+
+    public static OrderBuilder builder() {
+        return new OrderBuilder();
+    }
+
+
+    public static class OrderBuilder{
+        private Long id;
+        private List<Pizza> pizzas;
+        private List<Drink> drinks;
+        private String address;
+        private OrderStatus orderStatus;
+        private Long total;
+
+
+        public OrderBuilder() {
+
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public List<Pizza> getPizzas() {
+            return pizzas;
+        }
+
+        public void setPizzas(List<Pizza> pizzas) {
+            this.pizzas = pizzas;
+        }
+
+        public List<Drink> getDrinks() {
+            return drinks;
+        }
+
+        public void setDrinks(List<Drink> drinks) {
+            this.drinks = drinks;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public OrderStatus getOrderStatus() {
+            return orderStatus;
+        }
+
+        public void setOrderStatus(OrderStatus orderStatus) {
+            this.orderStatus = orderStatus;
+        }
+
+        public Long getTotal() {
+            return total;
+        }
+
+        public void setTotal(Long total) {
+            this.total = total;
+        }
+
+        public Order buildPizzaOrder(){
+            return new Order(id, pizzas, address, total);
+        }
+
+        public Order buildOrder(){
+            return new Order(id, pizzas, drinks, address, total);
+        }
 
     }
 

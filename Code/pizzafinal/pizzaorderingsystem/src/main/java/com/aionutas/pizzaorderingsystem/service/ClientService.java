@@ -7,14 +7,12 @@ import com.aionutas.pizzaorderingsystem.model.repository.OrderRepo;
 import com.aionutas.pizzaorderingsystem.model.utils.OrderStatus;
 import com.aionutas.pizzaorderingsystem.model.utils.Reminder;
 import com.mongodb.*;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @EnableMongoRepositories(basePackageClasses = ClientRepo.class)
@@ -29,7 +27,7 @@ public class ClientService implements Observer {
     OrderService orderService;
 
     public Client addClient(Client client) {
-        
+
         return clientRepo.save(client);
     }
 
@@ -92,5 +90,20 @@ public class ClientService implements Observer {
 
 
         return client;
+    }
+
+    public Client getByUsername(String name) throws JSONException {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        DB db = mongoClient.getDB("pizzaorderingsystem");
+        DBCollection coll = db.getCollection("client");
+        BasicDBObject query = new BasicDBObject("username", name);
+        DBObject cursor = coll.findOne(query);
+        if (!Objects.isNull(cursor) && cursor != null) {
+            if (!Objects.isNull(clientRepo.findById(Long.valueOf(cursor.get("_id").toString())).get())) {
+                return clientRepo.findById(Long.valueOf(cursor.get("_id").toString())).get();
+            }
+        }
+        return null;
+
     }
 }
