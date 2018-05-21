@@ -73,8 +73,4 @@ public class ClientController {
         return null;
     }
 
-    @RequestMapping(value = "/findClientByUsername/", method = RequestMethod.GET)
-    public Client findClientByUsername(@RequestParam String name) throws JSONException {
-        return clientService.getByUsername(name);
-    }
 }

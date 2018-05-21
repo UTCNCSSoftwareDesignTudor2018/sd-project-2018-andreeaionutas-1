@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @EnableMongoRepositories(basePackageClasses = PizzaStoreRepo.class)
@@ -95,20 +94,5 @@ public class PizzaStoreService {
 
 
         return pizzaStore;
-    }
-
-    public PizzaStore getByUsername(String name) throws JSONException {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        DB db = mongoClient.getDB("pizzaorderingsystem");
-        DBCollection coll = db.getCollection("pizzaStore");
-        BasicDBObject query = new BasicDBObject("username", name);
-        DBObject cursor = coll.findOne(query);
-        if (!Objects.isNull(cursor) && cursor != null) {
-            if (!Objects.isNull(pizzaStoreRepo.findById(Long.valueOf(cursor.get("_id").toString())).get())) {
-                return pizzaStoreRepo.findById(Long.valueOf(cursor.get("_id").toString())).get();
-            }
-        }
-        return null;
-
     }
 }

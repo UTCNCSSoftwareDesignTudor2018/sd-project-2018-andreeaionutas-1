@@ -1,0 +1,26 @@
+.storeContainer {
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+mat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+mat-card > span, mat-card > button {
+    padding: 10px;
+}
+
+mat-card > mat-form-field {
+    padding-left: 10px;
+    padding-right: 10px;
+}
