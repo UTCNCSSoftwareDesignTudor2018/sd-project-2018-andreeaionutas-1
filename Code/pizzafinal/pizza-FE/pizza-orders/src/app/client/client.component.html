@@ -1,0 +1,54 @@
+<div class="clientContainer">
+
+    <mat-card style="overflow: auto; padding: 3rem 2rem">
+        <mat-form-field>
+            <input matInput placeholder="Address" [(ngModel)]="address">
+        </mat-form-field>
+
+        <h1>Choose pizza</h1>
+
+        <div *ngFor="let pizza of pizzas" style="padding: 1rem 0;">
+            <mat-checkbox [(ngModel)]="pizza.checked">
+                <h2>{{pizza.name}} - {{pizza.price}} RON</h2>
+            </mat-checkbox>
+            <mat-list>
+                <h3 mat-subheader>
+                    <mat-icon>local_pizza</mat-icon>
+                    Ingredients
+                </h3>
+                <mat-list-item *ngFor="let ingredient of pizza.ingredients">
+                    {{ingredient.name}}
+                </mat-list-item>
+            </mat-list>
+            <mat-list>
+                <h3 mat-subheader>
+                    <mat-icon>local_pizza</mat-icon>
+                    Toppings
+                </h3>
+                <mat-list-item *ngFor="let topping of pizza.toppings">
+                    {{topping.name}}
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+    </mat-card>
+    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column">
+        <mat-card style="overflow: auto" style="height: 200px; width: 250px;">
+            <h1>Choose a drink</h1>
+
+            <div *ngFor="let drink of drinks">
+                <mat-checkbox [(ngModel)]="drink.checked">
+                    {{drink.name}} - {{drink.price}} RON
+                </mat-checkbox>
+            </div>
+
+        </mat-card>
+
+        <mat-card style="width:auto; height: auto; padding: 1rem; display: flex; align-items: center; flex-direction: column">
+            <button mat-button (click)="addPizza()"><span>Place order</span></button>
+            <mat-spinner  [diameter]="40" *ngIf="flag===1"></mat-spinner>
+        </mat-card>
+    </div>
+</div>
+
+

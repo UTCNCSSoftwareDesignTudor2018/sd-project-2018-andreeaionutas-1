@@ -1,0 +1,63 @@
+<div class="title">Menu Configuration</div>
+
+<div class="storeContainer">
+
+    <mat-card style="width: 200px;">
+        <span>Ingredients</span>
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Name" [(ngModel)]="ingredientName">
+        </mat-form-field>
+
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Price" [(ngModel)]="ingredientPrice">
+        </mat-form-field>
+
+        <button mat-button (click)="addIngredient()" style="text-align: center">Add Ingredient</button>
+    </mat-card>
+
+    <mat-card style="width: 200px;">
+        <span>Toppings</span>
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Name" [(ngModel)]="toppingName">
+        </mat-form-field>
+
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Price" [(ngModel)]="toppingPrice">
+        </mat-form-field>
+
+        <button mat-button (click)="addTopping()">Add Toppings</button>
+    </mat-card>
+
+    <mat-card style="width: 200px;">
+        <span>Drinks</span>
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Name" [(ngModel)]="drinkName">
+        </mat-form-field>
+
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Price" [(ngModel)]="drinkPrice">
+        </mat-form-field>
+
+        <button mat-button (click)="addDrink()">Add Drink</button>
+    </mat-card>
+
+    <mat-card style="width: 200px;">
+        <span>Pizza</span>
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Name" [(ngModel)]="pizzaName">
+        </mat-form-field>
+
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Ingredients" [(ngModel)]="pizzaIngredients">
+        </mat-form-field>
+
+        <mat-form-field style="width: 200px;">
+            <input matInput placeholder="Toppings" [(ngModel)]="pizzaToppings">
+        </mat-form-field>
+
+        <button mat-button (click)="addPizza()">Add pizza</button>
+    </mat-card>
+
+</div>
+
+
