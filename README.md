@@ -3,7 +3,9 @@ Ionutas Andreea
 
 Design Patterns:
 	-> Builder -> Ingredient
+	
 	-> Observer -> OrderService
+	
 	-> Strategy -> PaymentStrategy
 	
 One-To-Many
