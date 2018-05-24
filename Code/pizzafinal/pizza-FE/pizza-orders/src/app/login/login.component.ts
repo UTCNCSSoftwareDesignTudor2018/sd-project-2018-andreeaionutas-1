@@ -13,17 +13,21 @@ export class LoginComponent implements OnInit {
     public username;
     public password;
 
-    constructor(private service: AppService, private router: Router, public snackBar: MatSnackBar) {
+    constructor(
+        private service: AppService, // services for BE calls
+        private router: Router, // page routing system - navigation (after correcet credentials for login -> home)
+        public snackBar: MatSnackBar // pop-ups in current page ( login successfull )
+    ) {
     }
 
     ngOnInit() {
-        this.username = '';
+        this.username = ''; // init inputs - empty strings
         this.password = '';
     }
 
     login() {
-        this.service.login(this.username, this.password)
-            .subscribe((res) => {
+        this.service.login(this.username, this.password) // login function inside service
+            .subscribe((res) => { // returns Observable 1.response  function(success, error)
                     console.log(res);
                     if (res === 'Not a user') {
                         this.openSnackBar('Wrong username or password', '');
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
                         this.openSnackBar('Login successfull!', '');
                     }
                 },
-                (err) => {
+                (err) => { // 2. error
                     console.error(err);
                 })
     }

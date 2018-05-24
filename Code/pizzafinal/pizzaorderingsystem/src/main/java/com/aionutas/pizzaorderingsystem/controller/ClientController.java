@@ -3,6 +3,9 @@ package com.aionutas.pizzaorderingsystem.controller;
 import com.aionutas.pizzaorderingsystem.model.entity.Client;
 import com.aionutas.pizzaorderingsystem.service.ClientService;
 import com.aionutas.pizzaorderingsystem.service.OrderService;
+import com.aionutas.pizzaorderingsystem.validators.EmailValidator;
+import com.aionutas.pizzaorderingsystem.validators.NameValidator;
+import com.aionutas.pizzaorderingsystem.validators.Validator;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,9 @@ public class ClientController {
     @Autowired
     OrderService orderService;
 
+    EmailValidator emailValidator = new EmailValidator();
+    NameValidator nameValidator = new NameValidator();
+
     Random rand = new Random();
 
     @RequestMapping(value = "/findClient/{id}", method = RequestMethod.GET)
@@ -29,8 +35,11 @@ public class ClientController {
     @RequestMapping(value = "/addClient", method = RequestMethod.POST)
     public Client addClient(@RequestBody Client client) {
         client.setId(Long.valueOf(rand.nextInt(1000)));
-        if(!clientService.getById(client.getId()).isPresent()){
-            return clientService.addClient(client);}
+        if(emailValidator.validate(client) && nameValidator.validate(client)) {
+            if (!clientService.getById(client.getId()).isPresent()) {
+                return clientService.addClient(client);
+            } else return null;
+        }
         else return null;
     }
 
@@ -73,4 +82,8 @@ public class ClientController {
         return null;
     }
 
+    @RequestMapping(value = "/findClientByUsername/", method = RequestMethod.GET)
+    public Client findClientByUsername(@RequestParam String name) throws JSONException {
+        return clientService.getByUsername(name);
+    }
 }

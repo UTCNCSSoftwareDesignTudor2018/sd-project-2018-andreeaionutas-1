@@ -7,16 +7,20 @@ import {AppService} from "../app.service";
     styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-    flag = 0 ;
+    flag = 0;
     address;
     pizzas = [];
-    drinks =[];
+    drinks = [];
+    totalPizza;
+    totalDrinks;
 
     constructor(private appService: AppService) {
     }
 
     ngOnInit() {
-        this.flag=0;
+        this.totalPizza=0;
+        this.totalDrinks=0;
+        this.flag = 0;
         this.address = "";
         this.pizzas = [];
         this.drinks = [];
@@ -25,7 +29,7 @@ export class ClientComponent implements OnInit {
             .subscribe(res => {
                     this.pizzas = res;
                     this.pizzas.forEach(pizza => {
-                        pizza['checked']=false;
+                        pizza['checked'] = false;
                     });
                 },
                 err => {
@@ -36,7 +40,7 @@ export class ClientComponent implements OnInit {
             .subscribe(res => {
                     this.drinks = res;
                     this.drinks.forEach(drink => {
-                        drink['checked']=false;
+                        drink['checked'] = false;
                     });
                 },
                 err => {
@@ -44,15 +48,31 @@ export class ClientComponent implements OnInit {
                 });
     }
 
+    showTotal() {
+        console.log("da");
+        this.totalDrinks = 0;
+        this.totalPizza = 0;
+        let p = this.pizzas.filter(opt => opt.checked);
+        let d = this.drinks.filter(opt => opt.checked);
+        p.forEach(pizza => {
+            this.totalPizza += pizza.price;
+        });
+
+        d.forEach(drink => {
+            this.totalDrinks += drink.price;
+        });
+
+    }
+
 
     addPizza() {
         this.flag = 1;
-        let obj = { };
+        let obj = {};
         obj['address'] = this.address;
         obj['pizzas'] = this.pizzas.filter(opt => opt.checked);
         obj['drinks'] = this.drinks.filter(opt => opt.checked);
 
-        this.appService.orderPizza(JSON.stringify(obj))
+        this.appService.orderPizza(JSON.stringify(obj)) // transform in JSON
             .subscribe(res => {
                     console.log(res);
                 },
@@ -60,7 +80,6 @@ export class ClientComponent implements OnInit {
                     console.log("Could not order pizza")
                 });
     }
-
 
 
 }

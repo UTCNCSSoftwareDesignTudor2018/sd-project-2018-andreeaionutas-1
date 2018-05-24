@@ -2,7 +2,7 @@ Ionutas Andreea
 
 
 Design Patterns:
-	-> Builder -> Order
+	-> Builder -> Ingredient
 	-> Observer -> OrderService
 	-> Strategy -> PaymentStrategy
 	
@@ -11,8 +11,11 @@ One-To-Many
 		  -> Ingredients
 	Order -> Pizzas
 		  -> Drinks
+	
 Frameworks/Libraries
 	Spring
 	AngularJS
-
 Maven
+Validators -> for email and name (client)
+Unit tests
+Integration tests
